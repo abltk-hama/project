@@ -22,16 +22,16 @@
 ---
 
 ## ディレクトリ構成（予定）
-project_root/
-├── main.py
-├── config/             # 設定ファイル
-├── models/             # 車両モデル・物理モデル
-├── controllers/        # 制御アルゴリズム
-├── sim/                # シミュレーション管理・可視化
-├── trajectory/         # 経路処理
-├── optimization/       # 最適化アルゴリズムと評価関数
-├── utils/              # ロガー・センサー処理
-└── docs/               # ドキュメント
+- project_root/
+- ├── main.py
+- ├── config/             # 設定ファイル
+- ├── models/             # 車両モデル・物理モデル
+- ├── controllers/        # 制御アルゴリズム
+- ├── sim/                # シミュレーション管理・可視化
+- ├── trajectory/         # 経路処理
+- ├── optimization/       # 最適化アルゴリズムと評価関数
+- ├── utils/              # ロガー・センサー処理
+- └── docs/               # ドキュメント
 
 ---
 
