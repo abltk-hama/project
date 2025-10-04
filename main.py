@@ -1,21 +1,19 @@
 import numpy as np
 import time
-from config import Config
-import simulation
-from visualization import Visualization
-from trajectory_loader import TrajectoryLoader
-from optimization import Optimizer
-from trajectory_control import TrajectoryController
+from config.config import Config
+from sim.simulation import Simulation
+from sim.visualization import Visualization
+from trajectory.trajectory_loader import TrajectoryLoader
+from controllers.trajectory_control import TrajectoryController
 from simple_predict import PredictCompute
 from dubin_control import DubinsPath
 
 # ✅ シミュレーション環境のセットアップ
 config = Config()
 loader = TrajectoryLoader()
-car = simulation.CarSimulation()
-run = simulation.RunSimulation()
+car = Simulation.CarSimulation()
+run = Simulation.RunSimulation()
 visualizer = Visualization()
-# optimization = Optimizer()
 controller = TrajectoryController(mode="CTE")
 predict = PredictCompute()
 dubin = DubinsPath()
