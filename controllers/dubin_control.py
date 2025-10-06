@@ -1,5 +1,5 @@
 # Re-run the Dubins implementation example after reset
-from config import Config
+from config.config import Config
 import numpy as np
 import math
 import matplotlib.pyplot as plt
