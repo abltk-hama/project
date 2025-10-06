@@ -50,6 +50,23 @@ class geometry:
 
         return curvature, theta_target
     
+    def get_path_theta(self, trajectory, idx):
+        """軌道 `trajectory` の `idx` 番目の点での目標角度を計算する"""
+        trajectory = np.array(trajectory)  # ✅ NumPy 配列に変換
+
+        # ✅ インデックスの範囲外を防ぐ（境界条件）
+        if idx < 0 or idx >= len(trajectory) - 1:
+            return 0.0  # 端では目標角度が定義できない
+
+        # ✅ 現在の点と次の点を取得
+        x1, y1 = trajectory[idx]
+        x2, y2 = trajectory[idx + 1]
+
+        # ✅ 軌道の方向（目標角度）を計算
+        theta_target = np.arctan2(y2 - y1, x2 - x1)  # ✅ 目標方向の角度
+
+        return theta_target
+    
     def get_path_data(self, state, reference_trajectory, N):
         """経路情報を取得する"""
         x, y, theta, _, _ = state
