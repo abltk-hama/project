@@ -18,14 +18,17 @@
 
 ---
 
-## 🧭 階層構造の依存マップ
-- config ─┐
-- ↓
-- models ──┐
-- ↓
-- trajectory ───→ controllers ───→ sim
-- ↑                        ↓
-- └─────────── docs（横断情報）
+## 🧭 階層構造の依存マップ（視覚化 + 機械可読）
+
+```mermaid
+flowchart TD
+    config --> models
+    models --> trajectory
+    trajectory --> controllers
+    controllers --> sim
+    docs --- controllers
+    docs --- models
+    docs --- trajectory
 
 - **上位層**（controllers, sim）は、**下位層の出力を利用**して動作。  
 - **docs** は全体を横断する理論・設計知識を保持。
