@@ -29,6 +29,7 @@ flowchart TD
     docs --- controllers
     docs --- models
     docs --- trajectory
+```
 
 - **上位層**（controllers, sim）は、**下位層の出力を利用**して動作。  
 - **docs** は全体を横断する理論・設計知識を保持。
