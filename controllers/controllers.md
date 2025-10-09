@@ -1,31 +1,20 @@
-# controllers ディレクトリ
+# [MODULE]: controllers
+[PURPOSE]:
+  経路追従・姿勢制御などの上位制御アルゴリズムをまとめる層。
 
-制御アルゴリズムをまとめる。経路追従、Dubins、PSO適応制御、強化学習制御など複数の手法を共存させる。
+[SUBMODULES]:
+  - path_follow: 経路追従制御（CTE, θerr, ωerrに基づく）
+  - pose_regulation: 目的地点モード。Lyapunov関数制御やDubins経路を採用。
+  - pso_adapt: 適応的パラメータ最適化制御。
 
----
+[INTERFACE]:
+  入力: 現在位置、姿勢角、経路情報  
+  出力: v（並進速度）, δ（操舵角）
 
-## trajectory_control.py
-経路追従制御と目的地点モードの切り替えを扱う。
+[DEPENDS_ON]:
+  - models.physics
+  - trajectory.utils
+  - utils.math_tools
 
-### 関数一覧
-- `trajectory_following_control` : 経路上の姿勢差・CTEを用いて追従。
-- `goal_point_control` : DubinsやPose Regulationによる目的地点到達。
-
----
-
-## simple_predict.py（→ predict_control.py）
-予測制御の基盤。物理モデルと誤差計算を組み合わせて評価。
-
-### 関数一覧
-- `predict_horizon` : 複数ステップ先の誤差を評価。
-- `evaluate_control` : 誤差と滑らかさを元にスコア化。
-
----
-
-## pso_adaptive.py
-PSOを用いた係数最適化型の適応制御。
-
----
-
-## rl_control.py
-強化学習制御用。DQNやActor-Criticで制御ポリシーを学習する。
+[USED_BY]:
+  - sim.simulation
