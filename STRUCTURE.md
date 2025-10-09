@@ -20,15 +20,15 @@
 
 ## 🧭 階層構造の依存マップ（視覚化 + 機械可読）
 
-```flow
-flowchart TD
-    config => models
-    models => trajectory
-    trajectory => controllers
-    controllers => sim
-    docs => controllers
-    docs => models
-    docs => trajectory
+```mermaid
+graph TD
+    config --> models
+    models --> trajectory
+    trajectory --> controllers
+    controllers --> sim
+    docs --- controllers
+    docs --- models
+    docs --- trajectory
 ```
 
 - **上位層**（controllers, sim）は、**下位層の出力を利用**して動作。  
