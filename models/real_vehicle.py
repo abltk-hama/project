@@ -11,7 +11,7 @@ import smbus
 from pathlib import Path
 
 # param_ids.py を読み込み（project階層からの相対パス）
-from i2c_controller.params.param_ids import PARAMS
+from models.real_vehicle.param_ids import PARAMS
 
 class RealVehicle:
     """実機制御用の差動二輪ロボット制御クラス"""
