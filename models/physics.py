@@ -2,7 +2,7 @@ import numpy as np
 from config.config import Config
 from models.interfaces import VehicleInterface
 
-class Physics:
+class Physics(VehicleInterface):
     def __init__(self):
         config = Config()
         params = config.get_vehicle_params()
@@ -30,6 +30,10 @@ class Physics:
         self.omega = omega
         self.theta = theta
         self.v = v
+
+    def update_state(self, delta: float, v: float) -> None:
+        """既存の step() を呼び出す統一関数"""
+        self.step(delta, v)
 
     def step(self, delta, v):
         """ステアリング角 delta [rad]、速度 v [m/s] から車両の挙動を更新"""
@@ -62,6 +66,23 @@ class Physics:
 
         return self.x, self.y, self.theta, self.omega, self.v
     
-    def get_state(self):
-        """ 現在の車両状態を取得 """
-        return self.x, self.y, self.theta, self.omega, self.v
+    def get_state(self) -> dict:
+        """内部状態を辞書で返す"""
+        return {
+            "x": self.x,
+            "y": self.y,
+            "theta": self.theta,
+            "v": self.v,
+            "omega": self.omega,
+        }
+
+    def stop(self):
+        self.v = 0
+        self.omega = 0
+
+    def reset(self):
+        self.x = 0
+        self.y = 0
+        self.theta = 0
+        self.v = 0
+        self.omega = 0

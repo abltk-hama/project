@@ -10,10 +10,10 @@ import math
 import smbus
 from pathlib import Path
 
-# param_ids.py を読み込み（project階層からの相対パス）
 from models.real_vehicle.param_defs import PARAMS
+from models.interfaces import VehicleInterface
 
-class RealVehicle:
+class RealVehicle(VehicleInterface):
     """実機制御用の差動二輪ロボット制御クラス"""
 
     def __init__(self, i2c_bus_id=1, i2c_addr=0x08, wheel_base=0.5, wheel_radius=0.05):
@@ -99,24 +99,33 @@ class RealVehicle:
     # ================================================================
     # --- 高レベルインターフェース ---
     # ================================================================
-    def set_control(self, v, delta):
-        """統一インターフェース：速度・操舵角を設定"""
+    def update_state(self, delta: float, v: float) -> None:
+        """
+        シミュレーションとの統一API。
+        I2C送信によりモータ制御値を更新。
+        """
         self.update_motor_output(v, delta)
 
-    def get_state(self):
-        """現在の推定状態を返す（実機では簡易的にエンコーダベース）"""
+    def get_state(self) -> dict:
+        """
+        実機エンコーダなどから推定された車両状態を返す。
+        """
         return {
-            "v": self.v,
-            "delta": self.delta,
-            "encoder_L": self.encoder_L,
-            "encoder_R": self.encoder_R
+            "vL": getattr(self, "vL", 0.0),
+            "vR": getattr(self, "vR", 0.0),
+            "v": getattr(self, "v", 0.0),
+            "delta": getattr(self, "delta", 0.0),
+            "connected": getattr(self, "connected", False),
         }
 
-    def stop(self):
-        """停止コマンド"""
-        self.write_param(PARAMS["VEL_LEFT"]["id"], 0)
-        self.write_param(PARAMS["VEL_RIGHT"]["id"], 0)
-        self.v = 0.0
+    def stop(self) -> None:
+        self.update_motor_output(0.0, 0.0)
+
+    def reset(self) -> None:
+        """通信再初期化・エンコーダリセット"""
+        if hasattr(self, "controller"):
+            self.disconnect()
+        self.__init__()  # 再初期化
 
     # ================================================================
     # --- 終了処理 ---
