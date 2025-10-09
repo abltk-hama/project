@@ -1,5 +1,6 @@
 import numpy as np
 from config.config import Config
+from models.interfaces import VehicleInterface
 
 class Physics:
     def __init__(self):
