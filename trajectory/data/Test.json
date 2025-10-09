@@ -1,0 +1,19 @@
+{
+  "図形A": [
+    {
+      "type": "line",
+      "id": "L01",
+      "start": [0, 0],
+      "end": [10, 0]
+    },
+    {
+      "type": "arc",
+      "id": "A01",
+      "center": [5, 5],
+      "radius": 2,
+      "start_angle": 0,
+      "end_angle": 180,
+      "direction": "ccw"
+    }
+  ]
+}
