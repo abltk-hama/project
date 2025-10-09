@@ -36,6 +36,12 @@
 | `list_params(group)` | グループ内のパラメータ一覧取得 |
 | `describe_param(name)` | パラメータ説明の生成 |
 
+#### 主な定数
+| 定数名 | 説明 |
+|---------|------|
+| `PARAMS` | パラメータID・デフォルト値・説明を保持する辞書 |
+| `GROUPS` | パラメータ分類（PID, FF, Ratioなど）を保持 |
+
 ---
 
 ### interfaces.py  
@@ -61,3 +67,11 @@ models/
     ├── real_vehicle.py
     └── param_defs.py
 ```
+
+---
+
+## [UPDATE LOG]
+- **2025-10-09**  
+  - `interfaces.py` 新規追加。  
+  - `real_vehicle/param_defs.py` に `param_ids.py` の定義を統合。  
+  - `physics.py` / `real_vehicle.py` が共通API化。
