@@ -20,7 +20,7 @@
 
 ## 🧭 階層構造の依存マップ（視覚化 + 機械可読）
 
-```mermaid
+```flow
 flowchart TD
     config --> models
     models --> trajectory
