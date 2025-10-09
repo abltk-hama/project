@@ -102,8 +102,35 @@ graph TD
 
 ---
 
-### 💡 AI補助のヒント
-AIに渡すときは次のように明示すると効果的です：
-> 「以下の `STRUCTURE.md` をもとに、controllers.pose_regulation と models.geometry の依存関係を分析して」
+## [STRUCTURE OVERVIEW]
 
-これでAIは正確に依存グラフを構築できます。
+```
+project/
+├── config/
+│   └── config.md
+├── controllers/
+│   └── controllers.md
+├── models/
+│   ├── interfaces.py          ← 共通インターフェース（新規）
+│   ├── physics.py
+│   └── real_vehicle/
+│       ├── real_vehicle.py
+│       └── param_defs.py      ← パラメータ定義（旧param_ids.py統合）
+├── sim/
+│   └── simulation.py
+├── trajectory/
+│   └── trajectory_loader.py
+└── docs/
+    ├── STRUCTURE.md
+    ├── control_theory.md
+    ├── models.md
+    └── sim.md
+```
+
+---
+
+## [UPDATE LOG]
+- **2025-10-09**  
+  - `models/interfaces.py` を新規追加。  
+  - `real_vehicle/param_defs.py` を `param_ids.py` から移動・再構成。  
+  - `simulation.py` が `VehicleInterface` に基づき動的切替に対応。
