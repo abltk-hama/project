@@ -27,7 +27,7 @@ class RunSimulation:
         ref_step = 0
 
         # 初期状態の設定
-        theta_ref = geometry.get_path_theta(trajectory, 0)
+        theta_ref = self.geometry.get_path_theta(trajectory, 0)
         state = self.physics.initial_state(0.0, 0.0, 0.0, 0.0, 0.0)  # 初期向きを合わせる
         ref_state = self.physics.get_state()
         x, y, theta, omega, v = ref_state
