@@ -167,17 +167,19 @@ class PSO_adaptive():
             return ave_cte/2 + ave_theta/2 + ave_omega/2 + trend_cte[0]*2 + trend_theta[0]*2 + trend_omega[0]*2
         
         def calculate_diff(log):
-            diff = []
-            for i in range(1, len(log)-1):
-                diff.append((log[i+1]-log[i]) if log[i+1] > 0 else (log[i]-log[i+1]))
-            return diff
+            trend = []
+            # 先行して修正された重み付き平均を前提
+            for i in range(1, len(log)):
+                d_mag = abs(log[i]) - abs(log[i-1])
+                trend += max(0.0, d_mag)   # 悪化のみ罰則
+            return trend
         
         def calculate_mean(log, gamma=0.9):
             mean = 0.0
             weight = gamma ** np.arange(len(log))
             weigts = np.sum(weight)
             for i in range(1, len(log)-1):
-                mean += abs(log[i])
+                mean += weight[i] * abs(log[i])
             mean /= weigts
             return mean
         
