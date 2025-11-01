@@ -1,0 +1,6 @@
+
+    {"trajectory_id":"t1","elements":[
+      {"id":"L1","type":"line","start":[1,0,0],"end":[2,0,0],"speed":0.2},
+      {"id":"A1","type":"arc","center":[0,1],"radius":1.0,"start_angle":0,"end_angle":90,"direction":"ccw","speed":0.2}
+    ]}
+    
